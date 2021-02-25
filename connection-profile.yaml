@@ -38,21 +38,21 @@ organizations:
       path:  /home/nfs/crypto-config/peerOrganizations/org1/users/Admin@org1/msp/signcerts/Admin@org1-cert.pem
 orderers:
   orderer0:
-    url: grpcs://orderer0PODIP:7050
+    url: grpcs://orderer0PODIP:7050 #replace your IP
     grpcOptions:
       ssl-target-name-override: orderer0
     tlsCACerts:
       path:  /home/nfs/crypto-config/ordererOrganizations/consortium/orderers/orderer0/msp/tlscacerts/tlsca.consortium-cert.pem
   
   orderer1:
-    url: grpcs://orderer1PODIP:7050
+    url: grpcs://orderer1PODIP:7050 #replace your IP
     grpcOptions:
       ssl-target-name-override: orderer1
     tlsCACerts:
       path:  /home/nfs/crypto-config/ordererOrganizations/consortium/orderers/orderer1/msp/tlscacerts/tlsca.consortium-cert.pem
   
   orderer2:
-    url: grpcs://orderer2PODIP:7050
+    url: grpcs://orderer2PODIP:7050 #replace your IP
     grpcOptions:
       ssl-target-name-override: orderer2
     tlsCACerts:
@@ -60,7 +60,7 @@ orderers:
            
 peers:
   peer0-org1:
-    url: grpcs://Peer0PODIP:7051
+    url: grpcs://Peer0PODIP:7051 #replace your IP
     grpcOptions:
       ssl-target-name-override: peer0
     tlsRootCertFiles:
@@ -73,7 +73,7 @@ peers:
   
 certificateAuthorities:
   ca-org1:
-    url: https://ca-org1PODIP:7054
+    url: https://ca-org1PODIP:7054 #replace your IP
     httpOptions:
       verify: false
     tlsCACerts:

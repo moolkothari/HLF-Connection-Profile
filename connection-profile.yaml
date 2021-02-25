@@ -1,0 +1,85 @@
+---
+name: my.official-network.connectionprofile
+x-type: "hlfv1"
+description: "connection profile for 2.2.1  network"
+version: "1.0"
+
+client:
+  organization: org1
+  connection:
+    timeout:
+      peer:
+        endorser: '300'
+
+channels:
+  invoice:
+    orderers:
+      - orderer0
+      - orderer1
+      - orderer2
+    peers:
+      peer0-org1:
+        endorsingPeer: true
+        chaincodeQuery: true
+        ledgerQuery: true
+        eventSource: true
+        
+  
+organizations:
+  org1:
+    mspid: org1MSP
+    peers:
+      - peer0-org1
+    certificateAuthorities:
+      - ca-org1
+    adminPrivateKey:
+      path:  /home/nfs/crypto-config/peerOrganizations/org1/users/Admin@org1/msp/keystore/priv_sk
+    signedCert:
+      path:  /home/nfs/crypto-config/peerOrganizations/org1/users/Admin@org1/msp/signcerts/Admin@org1-cert.pem
+orderers:
+  orderer0:
+    url: grpcs://orderer0PODIP:7050
+    grpcOptions:
+      ssl-target-name-override: orderer0
+    tlsCACerts:
+      path:  /home/nfs/crypto-config/ordererOrganizations/consortium/orderers/orderer0/msp/tlscacerts/tlsca.consortium-cert.pem
+  
+  orderer1:
+    url: grpcs://orderer1PODIP:7050
+    grpcOptions:
+      ssl-target-name-override: orderer1
+    tlsCACerts:
+      path:  /home/nfs/crypto-config/ordererOrganizations/consortium/orderers/orderer1/msp/tlscacerts/tlsca.consortium-cert.pem
+  
+  orderer2:
+    url: grpcs://orderer2PODIP:7050
+    grpcOptions:
+      ssl-target-name-override: orderer2
+    tlsCACerts:
+      path:  /home/nfs/crypto-config/ordererOrganizations/consortium/orderers/orderer2/msp/tlscacerts/tlsca.consortium-cert.pem
+           
+peers:
+  peer0-org1:
+    url: grpcs://Peer0PODIP:7051
+    grpcOptions:
+      ssl-target-name-override: peer0
+    tlsRootCertFiles:
+      path: /home/nfs/crypto-config/peerOrganizations/org1/peers/peer0-org1/tls/ca.crt
+    tlsCACerts:
+      path: /home/nfs/crypto-config/peerOrganizations/org1/peers/peer0-org1/msp/tlscacerts/tlsca.org1-cert.pem
+    
+    
+     
+  
+certificateAuthorities:
+  ca-org1:
+    url: https://ca-org1PODIP:7054
+    httpOptions:
+      verify: false
+    tlsCACerts:
+      path: /home/nfs/crypto-config/peerOrganizations/org1/ca/ca.org1-cert.pem
+    registrar:
+      - enrollId: admin
+        enrollSecret: adminpw
+    caName: ca-org1
+    
